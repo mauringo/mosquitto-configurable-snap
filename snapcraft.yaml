@@ -1,0 +1,37 @@
+name: mosquitto-configurable
+version: '1.5'
+base: core20
+summary: mosquitto configurable snap
+description: |
+    The Snap configuration files are stored in: /var/snap/mosquitto-configurable/common/mosquitto.conf 
+   
+confinement: strict
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+  - build-on: arm64
+    run-on: arm64
+    
+apps:
+    
+    mosquitto:
+        command: bin/run.sh 
+        daemon: simple
+        plugs: [network, network-bind, mount-observe, network-observe, system-observe, bluetooth-control]
+        restart-condition: on-failure
+        
+parts:
+    mosquitto:
+        plugin: nil
+        stage-packages:
+            - mosquitto 
+            - mosquitto-clients
+            - libssl-dev
+            - libcurl-dev
+   
+    shscripts:  
+        source: ./shscripts/
+        plugin: dump
+        organize:
+          '*': bin/
