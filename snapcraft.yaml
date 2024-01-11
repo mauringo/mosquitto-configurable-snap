@@ -1,6 +1,6 @@
 name: mosquitto-configurable
 version: '1.5'
-base: core20
+base: core22
 summary: mosquitto configurable snap
 description: |
     The Snap configuration files are stored in: /var/snap/mosquitto-configurable/common/mosquitto.conf 
